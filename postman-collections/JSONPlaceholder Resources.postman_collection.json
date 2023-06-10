@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "856171a7-f2ed-4cfc-b855-7cba36156c1e",
+		"name": "JSONPlaceholder Resources",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dbff4c80-fb33-448d-84cc-d3110ec46bac",
+						"exec": [
+							"var _ = require('lodash')",
+							"",
+							"pm.test('Validate Response to be 200 OK',function(){",
+							"pm.response.to.have.status(200);",
+							"",
+							"});",
+							"pm.test('Validate Response Time to be less than 200ms',function(){",
+							"pm.expect(pm.response.responseTime).to.be.below(200);",
+							"",
+							"});",
+							"pm.test('Companies with name Group',() => {",
+							"_.each(pm.response.json(),(item) => {",
+							"var company_name = item.company.name;",
+							"if(company_name.endsWith('Group')){",
+							"console.log(company_name)",
+							"}",
+							"})",
+							"pm.expect(pm.response.text()).to.include(\"Group\")",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/users",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
